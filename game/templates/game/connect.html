@@ -1,0 +1,14 @@
+{% extends "main/layout.html" %}
+
+{% block content %}
+    
+<div class="features">
+    <h1>Connect to Game</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="game_id">Game ID:</label>
+        <input type="text" id="game_id" name="game_id">
+        <button type="submit">Connect to Game</button>
+    </form>
+</div>
+{% endblock %}

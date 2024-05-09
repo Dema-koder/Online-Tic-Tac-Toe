@@ -1,0 +1,16 @@
+{% extends "main/layout.html" %}
+
+
+{% block content %}
+    
+<div class="features">
+    <h1>Game</h1>
+    <p>Game ID: {{ game.id }}</p>
+    <p>Cross ID: {{ game.cross_id }}</p>
+    <p>Nought ID: {{ game.nought_id }}</p>
+    <p>Whose move: {{ game.whose_move }}</p>
+    <p>Moves: {{ game.moves }}</p>
+    <p>Winner: {{ game.winner }}</p>
+</div>
+
+{% endblock %}

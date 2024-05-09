@@ -1,0 +1,61 @@
+body {
+    background: #E4F2F6;
+}
+
+aside {
+    float: left;
+    background: #889CD7;
+    width: 20%;
+    padding: 2.5%;
+    height: 100vh;
+    color: #fff;
+    border-right: 5px solid #9FC0DF;
+}
+
+aside img {
+    width: 60px;
+    margin-bottom: 20px;
+}
+
+aside h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+}
+
+aside ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+aside ul li:hover {
+    background-color: #6A6DCD;
+}
+
+aside ul li i {
+    margin-right: 10px;
+}
+
+aside .Icon {
+    font-size: 28px;
+    margin-left: 7px;
+    font-weight: bold;
+    position: relative;
+    top: -5px;
+}
+
+main .features {
+    float: left;
+    color: #260392;
+    margin-top: 100px;
+    text-align: center;
+    width: 75%;
+}
+
+main .features h1 {font-size: 50px;}
+main .features p {max-width: 400px; margin: 20px auto}

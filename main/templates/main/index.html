@@ -1,0 +1,13 @@
+{% extends "main/layout.html" %}
+
+{% block title %}
+Main page
+{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Main page</h1>
+        <p>Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.</p>
+        <a href="{% url 'about' %}"><button class="btn btn-warning">About us</button></a>
+    </div>
+{% endblock %}
