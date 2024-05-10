@@ -1,6 +1,11 @@
-version: '3.9'
-
 services:
+  tictactoe:
+    build: ./Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - tictactoe_data:/app/
+    ports:
+      - "8000:8000"
   grafana:
     image: grafana/grafana-oss:latest
     ports:
@@ -24,3 +29,4 @@ services:
 volumes:
   prometheus_data: { }
   grafana_data: { }
+  tictactoe_data: { }
