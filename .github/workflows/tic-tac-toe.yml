@@ -33,12 +33,13 @@ jobs:
     name: Build
     steps:
     - name: Login to docker.io
-      run:  | 
-            docker logout ghcr.io
-            docker login -u USERNAME --password-stdin ghcr.io
+      run:  echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@master
     - name: Build docker image
-      run: docker build --tag ghcr.io/emapfff/online-tic-tac-toe:latest -f ${{ github.workspace }}/Dockerfile .
+      run: docker build -t $LOGIN/$NAME:${GITHUB_REF:11} -f Dockerfile .
+    - name: Push to docker
+      run: docker push $LOGIN/$NAME:${GITHUB_REF:11}
+    
   
 
       
