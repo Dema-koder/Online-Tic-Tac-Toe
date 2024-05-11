@@ -17,4 +17,5 @@ urlpatterns = [
     path('create/', game_views.create_game, name='create_game'),
     path('connect/', game_views.connect, name='connect'),
     path('connect_to_game/<int:game_id>/', game_views.connect_to_game, name='connect_to_game'),
+    path('game/<int:game_id>/make_move/', game_views.make_move, name='make_move'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
