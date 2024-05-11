@@ -3,7 +3,6 @@ from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 from game import views as game_views
-
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -18,4 +17,5 @@ urlpatterns = [
     path('connect/', game_views.connect, name='connect'),
     path('connect_to_game/<int:game_id>/', game_views.connect_to_game, name='connect_to_game'),
     path('game/<int:game_id>/make_move/', game_views.make_move, name='make_move'),
+    path('', include('django_prometheus.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
