@@ -9,7 +9,7 @@ env:
   LOGIN: ${{ secrets.DOCKER_LOGIN }}
   PASSWORD: ${{ secrets.DOCKER_PWD }}
 jobs:
-  run-tests:
+  test:
     runs-on: [ubuntu-latest]
     name: Running tests
     steps:
@@ -23,10 +23,12 @@ jobs:
       run: |
           python manage.py test
           echo "Tests worked successfully"
-  deploy:
+  build_publish:
     runs-on: [ubuntu-latest]
     name: Build
     steps:
     - name: Login to docker.io
       run:  echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
-  
+    - uses: actions/checkout@master
+    - name: Build docker compose
+      run: docker-compose build -t $LOGIN/$NAME:${GITHUB_REF:11} -f docker-compose.yml .
