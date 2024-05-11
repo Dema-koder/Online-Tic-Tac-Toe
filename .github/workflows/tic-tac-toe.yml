@@ -27,6 +27,6 @@ jobs:
     name: Build
     steps:
     - name: Login to docker.io
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | echo ${{ secrets.DOCKER_LOGIN }}
     - uses: actions/checkout@master
   
