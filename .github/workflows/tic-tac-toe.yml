@@ -35,10 +35,10 @@ jobs:
     - name: Login to docker.io
       run:  echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@master
-    - name: Build docker image
-      run: docker build -t $LOGIN/$NAME:${GITHUB_REF:11} -f Dockerfile .
-    - name: Push to docker
-      run: docker push $LOGIN/$NAME:${GITHUB_REF:11}
+    - name: Build and push docker images
+      run: |
+        docker-compose -f docker-compose.yml build
+        docker-compose -f docker-compose.yml push
     
   
 
