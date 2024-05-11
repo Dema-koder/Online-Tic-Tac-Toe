@@ -41,7 +41,6 @@ jobs:
     - name: Push image
       run: |
         docker tag online-tic-tac-toe $LOGIN/online-tic-tac-toe:latest
-        docker push $LOGIN/online-tic-tac-toe:latest
       
         
     
