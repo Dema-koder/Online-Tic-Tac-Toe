@@ -8,6 +8,8 @@ on:
 env:
   LOGIN: ${{ secrets.DOCKER_LOGIN }}
   PASSWORD: ${{ secrets.DOCKER_PWD }}
+  IMAGE_TAG: ${GITHUB_REF:11}
+  
 jobs:
   test:
     runs-on: [ubuntu-latest]
@@ -31,6 +33,6 @@ jobs:
       run:  echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@master
     - name: Build docker compose
-      run: docker-compose up $LOGIN/$NAME:${GITHUB_REF:11} -f docker-compose.yml .
+      run:  docker-compose build --parallel $LOGIN/$NAME:$IMAGE_TAG
     - name: Push image to docker.io
       run: docker push $LOGIN/$NAME:${GITHUB_REF:11}
