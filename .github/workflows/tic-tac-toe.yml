@@ -1,14 +1,17 @@
 name: Tic tac toe CI/CD 
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - '*'
-
+    paths:
+      - .github/workflows/tic-tac-toe.yml
+  pull_request:
+    paths:
+      - .github/workflows/tic-tac-toe.yml.yml
+      
 env:
   LOGIN: ${{ secrets.DOCKER_LOGIN }}
   PASSWORD: ${{ secrets.DOCKER_PWD }}
-  IMAGE_TAG: ${GITHUB_REF:11}
   
 jobs:
   test:
@@ -30,8 +33,10 @@ jobs:
     name: Build
     steps:
     - name: Login to docker.io
-      run:  echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+      run:  docker login --username ${{ secrets.DOCKER_LOGIN }} --password ${{ secrets.DOCKER_PWD }} ghcr.io
     - uses: actions/checkout@master
-    - name: Build docker compose
-      run:  docker-compose build --parallel ${{ secrets.DOCKER_NAME }} .
+    - name: Build docker image
+      run: docker build --tag ghcr.io/emapfff/online-tic-tac-toe:latest -f ${{ github.workspace }}/Dockerfile .
+  
+
       
