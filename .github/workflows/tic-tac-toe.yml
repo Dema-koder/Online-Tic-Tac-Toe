@@ -7,7 +7,7 @@ on:
 jobs:
   run-tests:
     runs-on: [ubuntu-latest]
-    name: Build
+    name: Running tests
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-python@v1
@@ -19,6 +19,12 @@ jobs:
       run: |
           python manage.py test
           echo "Tests worked successfully"
+  deploy:
+    runs-on: [ubuntu-latest]
+    name: Build
+    steps:
+    - name: Login to docker.io
+      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
   
     
   
