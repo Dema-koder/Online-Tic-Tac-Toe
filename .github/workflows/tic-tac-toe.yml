@@ -33,7 +33,7 @@ jobs:
     name: Build
     steps:
     - name: Login to docker.io
-      run:  docker login --username ${{ secrets.DOCKER_LOGIN }} --password ${{ secrets.DOCKER_PWD }} ghcr.io
+      run:  docker login --username ${{ secrets.DOCKER_LOGIN }}  --password-stdin ${{ secrets.DOCKER_PWD }} ghcr.io
     - uses: actions/checkout@master
     - name: Build docker image
       run: docker build --tag ghcr.io/emapfff/online-tic-tac-toe:latest -f ${{ github.workspace }}/Dockerfile .
