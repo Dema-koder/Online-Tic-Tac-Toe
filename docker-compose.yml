@@ -1,11 +1,12 @@
 services:
   tictactoe:
-    build: ./Dockerfile
+    build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - tictactoe_data:/app/
+      - tictactoe_data:/usr/src/app/data
     ports:
       - "8000:8000"
+    working_dir: /usr/src/app
   grafana:
     image: grafana/grafana-oss:latest
     ports:
