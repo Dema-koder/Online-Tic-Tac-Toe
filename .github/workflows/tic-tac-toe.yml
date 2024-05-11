@@ -12,6 +12,7 @@ on:
 env:
   LOGIN: ${{ secrets.DOCKER_LOGIN }}
   PASSWORD: ${{ secrets.DOCKER_PWD }}
+  NAME: ${{ secrets.DOCKER_NAME }}
   
 jobs:
   test:
@@ -35,10 +36,14 @@ jobs:
     - name: Login to docker.io
       run:  echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@master
-    - name: Build and push docker images
+    - name: Build image
+      run: docker build -t $NAME .
+    - name: Push image
       run: |
-        docker-compose -f docker-compose.yml build
-        docker-compose -f docker-compose.yml push
+        docker tag online-tic-tac-toe $LOGIN/$NAME:latest
+        docker push $LOGIN/$NAME:latest
+      
+        
     
   
 
