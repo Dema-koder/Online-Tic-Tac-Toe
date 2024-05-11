@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from game.models import Game
 
+
 class GameTestCase(TestCase):
     def setUp(self):
         self.user1 = User.objects.create(username='user1')
