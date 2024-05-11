@@ -1,6 +1,12 @@
-version: '3.9'
-
 services:
+  tictactoe:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - tictactoe_data:/usr/src/app/data
+    ports:
+      - "8000:8000"
+    working_dir: /usr/src/app
   grafana:
     image: grafana/grafana-oss:latest
     ports:
@@ -24,3 +30,4 @@ services:
 volumes:
   prometheus_data: { }
   grafana_data: { }
+  tictactoe_data: { }
