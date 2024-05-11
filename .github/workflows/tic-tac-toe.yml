@@ -38,10 +38,10 @@ jobs:
     - uses: actions/checkout@master
     - name: Build image
       run: docker build -t $NAME .
-    - name: Push image
-      run: |
-        docker tag online-tic-tac-toe $LOGIN/$NAME:latest
-        docker push $LOGIN/$NAME:latest
+    # - name: Push image
+    #   run: |
+    #     docker tag $NAME $LOGIN/$NAME:latest
+    #     docker push $LOGIN/$NAME:latest
       
         
     
