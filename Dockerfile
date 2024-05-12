@@ -15,3 +15,5 @@ WORKDIR /usr/src/app
 COPY --from=base /usr/local/lib/python3.9/site-packages/ /usr/local/lib/python3.9/site-packages/
 COPY --from=base /usr/local/bin/ /usr/local/bin/
 COPY . /usr/src/app/
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -1,7 +1,6 @@
 services:
   tictactoe:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - tictactoe_data:/usr/src/app/data
     ports:
