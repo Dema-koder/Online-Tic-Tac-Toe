@@ -12,6 +12,7 @@ on:
 env:
   LOGIN: ${{ secrets.DOCKER_LOGIN }}
   PASSWORD: ${{ secrets.DOCKER_PWD }}
+  NAME: ${{ secrets.DOCKER_NAME }}
   
 jobs:
   test:
@@ -28,15 +29,35 @@ jobs:
       run: |
           python manage.py test
           echo "Tests worked successfully"
-  build_publish:
+  build_publish_deploy:
+    needs: [test]
     runs-on: [ubuntu-latest]
     name: Build
     steps:
     - name: Login to docker.io
-      run:  docker login --username ${{ secrets.DOCKER_LOGIN }}  --password-stdin ${{ secrets.DOCKER_PWD }} ghcr.io
+      run:  echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
     - uses: actions/checkout@master
-    - name: Build docker image
-      run: docker build --tag ghcr.io/emapfff/online-tic-tac-toe:latest -f ${{ github.workspace }}/Dockerfile .
-  
-
+    - name: Build image
+      run: docker build -t online-tic-tac-toe .
+    - name: Push image
+      run: |
+        docker tag online-tic-tac-toe ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
+        docker push ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
+    - name: Deploy to Server 
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PWD }}
+        script: |
+          echo -L "Connected successfully!!"
+          # Stop the previous container
+          docker stop online-tic-tac-toe || true
+          # Remove the previous container
+          docker rm online-tic-tac-toe || true
+          # Pull the latest image
+          docker pull ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
+          # Run the new container
+          docker run -d --name online-tic-tac-toe -p 8000:8000 ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
+        
       
