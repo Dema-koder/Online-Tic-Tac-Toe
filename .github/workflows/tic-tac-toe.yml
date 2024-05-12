@@ -3,11 +3,9 @@ name: Tic tac toe CI/CD
 on:
   workflow_dispatch:
   push:
-    paths:
-      - .github/workflows/tic-tac-toe.yml
-  pull_request:
-    paths:
-      - .github/workflows/tic-tac-toe.yml.yml
+    branches:
+      - main
+
       
 env:
   LOGIN: ${{ secrets.DOCKER_LOGIN }}
