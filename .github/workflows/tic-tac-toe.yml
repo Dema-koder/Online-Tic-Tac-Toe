@@ -50,6 +50,6 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PWD }}
         script: |
-          echo -L "Connected successfully!!!"
+          echo -L "Connected successfully!!"
         
       
