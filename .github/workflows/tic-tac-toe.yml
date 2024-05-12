@@ -45,7 +45,7 @@ jobs:
       run: |
         docker tag online-tic-tac-toe ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
         docker push ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
-        docker compoose push 
+        docker compose push 
     - name: Deploy to Server 
       uses: appleboy/ssh-action@master
       with:
