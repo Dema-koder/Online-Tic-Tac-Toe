@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-
       
 env:
   LOGIN: ${{ secrets.DOCKER_LOGIN }}
