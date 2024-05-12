@@ -49,15 +49,5 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PWD }}
-        script: |
-          # Stop the previous container
-          docker stop online-tic-tac-toe || true
-          # Remove the previous container
-          docker rm online-tic-tac-toe || true
-          # Pull the latest image
-          docker pull ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
-          # Run the new container
-          docker run -d --name online-tic-tac-toe -p 8000:8000 ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
-
 
       
