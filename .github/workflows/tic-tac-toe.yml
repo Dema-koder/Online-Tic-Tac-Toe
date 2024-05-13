@@ -52,6 +52,7 @@ jobs:
         password: ${{ secrets.SSH_PWD }}
         script: |
           echo -L "Connected successfully!!"
+          docker image prune -a
           # Stop the previous container
           docker stop online-tic-tac-toe || true
           # Remove the previous container
