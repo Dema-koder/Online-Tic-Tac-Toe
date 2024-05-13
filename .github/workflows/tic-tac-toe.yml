@@ -40,12 +40,10 @@ jobs:
     - name: Build image
       run: |
         docker build -t online-tic-tac-toe .
-        docker compose build 
     - name: Push image
       run: |
         docker tag online-tic-tac-toe ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
         docker push ${{ secrets.DOCKER_LOGIN }}/online-tic-tac-toe:latest
-        docker compose push 
     - name: Deploy to Server 
       uses: appleboy/ssh-action@master
       with:
